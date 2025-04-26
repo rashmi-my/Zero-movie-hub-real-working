@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Error {{ error_code }} - Zero Movie Hub{% endblock %}
+
+{% block content %}
+<div class="text-center py-5">
+    <h1 class="display-1">{{ error_code }}</h1>
+    <p class="lead">{{ message }}</p>
+    <a href="{{ url_for('main.index') }}" class="btn btn-primary mt-3">
+        <i class="bi bi-house-door me-2"></i> Return to Home
+    </a>
+</div>
+{% endblock %}
