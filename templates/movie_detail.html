@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ movie.title }} - Zero Movie Hub{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.2/plyr.css" />
+<style>
+    .movie-container {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    .plyr {
+        border-radius: 8px;
+        overflow: hidden;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="movie-container">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Home</a></li>
+            <li class="breadcrumb-item active">{{ movie.title }}</li>
+        </ol>
+    </nav>
+
+    <h1 class="mb-4">{{ movie.title }}</h1>
+    
+    <div class="mb-4">
+        <div class="ratio ratio-16x9">
+            <video id="player" playsinline controls>
+                <source src="{{ movie.video_url }}" type="video/mp4" />
+            </video>
+        </div>
+    </div>
+    
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <span class="text-muted">Added on {{ movie.created_at.strftime('%b %d, %Y') }}</span>
+        </div>
+        <div>
+            <a href="{{ movie.download_url }}" class="btn btn-success" target="_blank">
+                <i class="bi bi-download me-2"></i> Download
+            </a>
+        </div>
+    </div>
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2 class="h5 mb-0">Description</h2>
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{ movie.description }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdn.plyr.io/3.7.2/plyr.polyfilled.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const player = new Plyr('#player', {
+            controls: [
+                'play-large', 'play', 'progress', 'current-time', 'mute', 
+                'volume', 'captions', 'settings', 'pip', 'airplay', 'fullscreen'
+            ],
+            storage: { enabled: true, key: 'plyr' }
+        });
+    });
+</script>
+{% endblock %}
