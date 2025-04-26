@@ -12,7 +12,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('main.index') }}">
+            <a class="navbar-brand" href="{{ url_for('index') }}">
                 <i class="bi bi-film me-2"></i>Zero Movie Hub
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -21,20 +21,20 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('main.index') }}">Home</a>
+                        <a class="nav-link" href="{{ url_for('index') }}">Home</a>
                     </li>
                 </ul>
                 
-                <form class="d-flex me-3" action="{{ url_for('main.search') }}" method="get">
+                <form class="d-flex me-3" action="{{ url_for('search') }}" method="get">
                     <input class="form-control me-2" type="search" name="q" placeholder="Search movies...">
                     <button class="btn btn-outline-light" type="submit">Search</button>
                 </form>
                 
                 <ul class="navbar-nav">
-                    {% if current_user.is_authenticated %}
+                    {% if current_user %}
                         {% if current_user.is_admin %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('admin.admin_dashboard') }}">Admin Panel</a>
+                                <a class="nav-link" href="{{ url_for('admin_dashboard') }}">Admin Panel</a>
                             </li>
                         {% endif %}
                         <li class="nav-item dropdown">
@@ -42,15 +42,15 @@
                                 {{ current_user.username }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
                             </ul>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('auth.signup') }}">Sign Up</a>
+                            <a class="nav-link" href="{{ url_for('signup') }}">Sign Up</a>
                         </li>
                     {% endif %}
                 </ul>
