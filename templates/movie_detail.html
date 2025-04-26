@@ -20,7 +20,7 @@
 <div class="movie-container">
     <nav aria-label="breadcrumb" class="mb-4">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
             <li class="breadcrumb-item active">{{ movie.title }}</li>
         </ol>
     </nav>
@@ -37,7 +37,7 @@
     
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <span class="text-muted">Added on {{ movie.created_at.strftime('%b %d, %Y') }}</span>
+            <span class="text-muted">Added on {{ movie.created_at_formatted }}</span>
         </div>
         <div>
             <a href="{{ movie.download_url }}" class="btn btn-success" target="_blank">
